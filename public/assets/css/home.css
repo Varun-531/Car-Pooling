@@ -1,0 +1,410 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0px 10px 0px 10px;
+    height: 100vh;
+}
+
+object {
+    height: 100%;
+    width: 100%;
+}
+
+.div-svg {
+    height: 71%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.options {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.headmain h1 {
+    font-size: 2rem;
+}
+
+.headmain p {
+    font-size: 1.22rem
+}
+
+.options label {
+    margin: 0px 10px 0px 10px;
+    font-size: 1.3rem;
+}
+
+.options input {
+    margin: 0px 10px 0px 10px;
+    align-items: center;
+    width: 226px;
+    height: 20px;
+    font-size: 16px;
+}
+
+.div-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+button {
+    background-color: #85e3b3;
+    color: black;
+    border-radius: 3px;
+    width: 73px;
+    height: 34px;
+    border: 1px;
+    cursor: pointer;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+button:hover {
+    background-color: #263238;
+    color: white;
+    transition-delay: 0.2s;
+    transform: scale(1.1);
+}
+
+.f01 {
+    height: 100vh;
+}
+
+/* .headside input {
+    width: 114px;
+    height: 33px;
+    margin: 0px 10px 0px 10px;
+    font-weight: bold;
+} */
+
+.headside {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.headside input {
+    background-color: #85e3b3;
+    color: black;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+}
+
+/* .headside input:hover {
+    background-color: #374638;
+    color: white ;
+
+} */
+.headside input {
+    width: 114px;
+    height: 33px;
+    margin: 0px 10px 0px 10px;
+    font-weight: bold;
+    transition: background-color 0.5s ease, color 0.5s ease; /* Add the transition property for both background-color and color */
+}
+/* Add your CSS for the loading animation here */
+.bike-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff; /* Background color for the loader */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000; /* Make it appear above other content */
+}
+
+.bike {
+    display: block;
+    margin: auto;
+    width: 16em;
+    height: auto;
+}
+
+.bike__body,
+.bike__front,
+.bike__handlebars,
+.bike__pedals,
+.bike__pedals-spin,
+.bike__seat,
+.bike__spokes,
+.bike__spokes-spin,
+.bike__tire {
+    animation: bikeBody 3s ease-in-out infinite;
+    stroke: var(--primary);
+    transition: stroke var(--trans-dur);
+}
+
+.bike__front {
+    animation-name: bikeFront;
+}
+
+.bike__handlebars {
+    animation-name: bikeHandlebars;
+}
+
+.bike__pedals {
+    animation-name: bikePedals;
+}
+
+.bike__pedals-spin {
+    animation-name: bikePedalsSpin;
+}
+
+.bike__seat {
+    animation-name: bikeSeat;
+}
+
+.bike__spokes,
+.bike__tire {
+    stroke: currentColor;
+}
+
+.bike__spokes {
+    animation-name: bikeSpokes;
+}
+
+.bike__spokes-spin {
+    animation-name: bikeSpokesSpin;
+}
+
+.bike__tire {
+    animation-name: bikeTire;
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: hsl(var(--hue),90%,10%);
+        --fg: hsl(var(--hue),90%,90%);
+    }
+}
+
+/* Animations */
+@keyframes bikeBody {
+    from { stroke-dashoffset: 79; }
+    33%,
+    67% { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -79; }
+}
+
+@keyframes bikeFront {
+    from { stroke-dashoffset: 19; }
+    33%,
+    67% { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -19; }
+}
+
+@keyframes bikeHandlebars {
+    from { stroke-dashoffset: 10; }
+    33%,
+    67% { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -10; }
+}
+
+@keyframes bikePedals {
+    from {
+        animation-timing-function: ease-in;
+        stroke-dashoffset: -25.133;
+    }
+    33%,
+    67% {
+        animation-timing-function: ease-out;
+        stroke-dashoffset: -21.991;
+    }
+    to {
+        stroke-dashoffset: -25.133;
+    }
+}
+
+@keyframes bikePedalsSpin {
+    from { transform: rotate(0.1875turn); }
+    to { transform: rotate(3.1875turn); }
+}
+
+@keyframes bikeSeat {
+    from { stroke-dashoffset: 5; }
+    33%,
+    67% { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -5; }
+}
+
+@keyframes bikeSpokes {
+    from {
+        animation-timing-function: ease-in;
+        stroke-dashoffset: -31.416;
+    }
+    33%,
+    67% {
+        animation-timing-function: ease-out;
+        stroke-dashoffset: -23.562;
+    }
+    to {
+        stroke-dashoffset: -31.416;
+    }
+}
+
+@keyframes bikeSpokesSpin {
+    from { transform: rotate(0); }
+    to { transform: rotate(3turn); }
+}
+
+@keyframes bikeTire {
+    from {
+        animation-timing-function: ease-in;
+        stroke-dashoffset: 56.549;
+        transform: rotate(0);
+    }
+    33% {
+        stroke-dashoffset: 0;
+        transform: rotate(0.33turn);
+    }
+    67% {
+        animation-timing-function: ease-out;
+        stroke-dashoffset: 0;
+        transform: rotate(0.67turn);
+    }
+    to {
+        stroke-dashoffset: -56.549;
+        transform: rotate(1turn);
+    }
+}
+
+.headside input:hover {
+    background-color: #263238;
+    color: white;
+    transform: scale(1.1);
+    transition-delay: 0.2s; /* Add a 1-second delay to the hover effect */
+}
+.in input{
+    border: none;
+    border-bottom: 1px solid black;
+    /* text-align: center; */
+}
+.in input:focus {
+    outline: none; 
+  }
+
+
+.info {
+    cursor: pointer;
+    /* height: 100px; */
+}
+
+.head {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.result {
+    padding: 10px;
+    width: 300px;
+}
+
+.result button {
+    margin: 10px;
+}
+
+.suggestions {
+    /* position: absolute; */
+    /* background-color: white;
+    border: 1px solid #ccc; */
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1;
+    width: 162px;
+    top: 0px;
+    margin-left: 10px;
+    left: 10px;
+    cursor: pointer;
+}
+
+#searchResults {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.result-details {
+    padding-right: 33px;
+}
+
+#userInfo {
+    margin: 10px;
+    color: #263238;
+    font-size: 1rem;
+    /* background-color: #263238; */
+    padding: 0px 7px 0px 7px;
+    border-radius: 3px;
+    height: 33px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.result {
+    width: 276px;
+    height: 108px;
+    border: 1px solid black;
+    margin: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+}
+
+
+#tete {
+    width: 129px;
+    height: 25px;
+}
+
+.form1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.out {
+    display: flex;
+    flex-direction: row;
+}
+
+#submit {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.info {
+    overflow: hidden;
+    background-color: transparent;
+    transition: background-color 0.5s ease, color 0.5s ease, transform 0.5s ease; /* Add the transition property for background-color, color, and transform */
+}
+
+.info:hover {
+    /* background-color: #daf0e5; */
+    transform: scale(1.1); /* Increase the scale to 1.2 (you can adjust the value as needed) */
+}

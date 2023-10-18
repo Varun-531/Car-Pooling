@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    padding: 0%;
+    margin: 4px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Add your CSS for the loading animation here */
+.bike-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff; /* Background color for the loader */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000; /* Make it appear above other content */
+}
+
+.bike {
+    display: block;
+    margin: auto;
+    width: 16em;
+    height: auto;
+}
+
+.bike__body,
+.bike__front,
+.bike__handlebars,
+.bike__pedals,
+.bike__pedals-spin,
+.bike__seat,
+.bike__spokes,
+.bike__spokes-spin,
+.bike__tire {
+    animation: bikeBody 3s ease-in-out infinite;
+    stroke: var(--primary);
+    transition: stroke var(--trans-dur);
+}
+
+.bike__front {
+    animation-name: bikeFront;
+}
+
+.bike__handlebars {
+    animation-name: bikeHandlebars;
+}
+
+.bike__pedals {
+    animation-name: bikePedals;
+}
+
+.bike__pedals-spin {
+    animation-name: bikePedalsSpin;
+}
+
+.bike__seat {
+    animation-name: bikeSeat;
+}
+
+.bike__spokes,
+.bike__tire {
+    stroke: currentColor;
+}
+
+.bike__spokes {
+    animation-name: bikeSpokes;
+}
+
+.bike__spokes-spin {
+    animation-name: bikeSpokesSpin;
+}
+
+.bike__tire {
+    animation-name: bikeTire;
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: hsl(var(--hue),90%,10%);
+        --fg: hsl(var(--hue),90%,90%);
+    }
+}
+
+/* Animations */
+@keyframes bikeBody {
+    from { stroke-dashoffset: 79; }
+    33%,
+    67% { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -79; }
+}
+
+@keyframes bikeFront {
+    from { stroke-dashoffset: 19; }
+    33%,
+    67% { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -19; }
+}
+
+@keyframes bikeHandlebars {
+    from { stroke-dashoffset: 10; }
+    33%,
+    67% { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -10; }
+}
+
+@keyframes bikePedals {
+    from {
+        animation-timing-function: ease-in;
+        stroke-dashoffset: -25.133;
+    }
+    33%,
+    67% {
+        animation-timing-function: ease-out;
+        stroke-dashoffset: -21.991;
+    }
+    to {
+        stroke-dashoffset: -25.133;
+    }
+}
+
+@keyframes bikePedalsSpin {
+    from { transform: rotate(0.1875turn); }
+    to { transform: rotate(3.1875turn); }
+}
+
+@keyframes bikeSeat {
+    from { stroke-dashoffset: 5; }
+    33%,
+    67% { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -5; }
+}
+
+@keyframes bikeSpokes {
+    from {
+        animation-timing-function: ease-in;
+        stroke-dashoffset: -31.416;
+    }
+    33%,
+    67% {
+        animation-timing-function: ease-out;
+        stroke-dashoffset: -23.562;
+    }
+    to {
+        stroke-dashoffset: -31.416;
+    }
+}
+
+@keyframes bikeSpokesSpin {
+    from { transform: rotate(0); }
+    to { transform: rotate(3turn); }
+}
+
+input:focus{
+    outline: none;
+}
+@keyframes bikeTire {
+    from {
+        animation-timing-function: ease-in;
+        stroke-dashoffset: 56.549;
+        transform: rotate(0);
+    }
+    33% {
+        stroke-dashoffset: 0;
+        transform: rotate(0.33turn);
+    }
+    67% {
+        animation-timing-function: ease-out;
+        stroke-dashoffset: 0;
+        transform: rotate(0.67turn);
+    }
+    to {
+        stroke-dashoffset: -56.549;
+        transform: rotate(1turn);
+    }
+}
+
+h1 {
+    font-size: 27px;
+}
+
+.main {
+    /* height: 80vh; */
+    display: flex;
+    flex-direction: row;
+}
+
+.div1 {
+    /* background-color: aquamarine; */
+    /* height: 100%; */
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.div2 {
+    background-color: #85e3b3;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 549px;
+}
+
+.div2 h1 {
+    color: white;
+    font-size: 3rem;
+    margin: 0%;
+    padding: 0px;
+}
+
+#h111 {
+    font-size: 2.5em;
+    margin: 0px;
+    padding: 0px;
+}
+
+#p111 {
+    margin: 0;
+    padding: 0;
+}
+
+.class {
+    width: 100%;
+}
+
+.google {
+    background-color: #85e3b3;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 10px 0px 10px;
+}
+
+.google img {
+    height: 30px;
+    width: auto;
+}
+
+.social {
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+}
+#form1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+input {
+    width: 334px;
+    border-radius: 84px;
+    border: none;
+    height: 37px;
+    margin: 10px;
+    background-color: #dbfdec;
+}
+
+.div1 input {
+    /* text-align: center; */
+    padding-left: 10px;
+}
+
+button {
+    height: 40px;
+    width: 105px;
+    border-radius: 27px;
+    border: none;
+    background-color: #85e3b3;
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+button:hover {
+    background-color: #b6f1d2;
+    cursor: pointer;
+}
+
+.div2 p {
+    font-size: 1rem;
+    color: white;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+}
+
+.div2 button {
+    background-color: white;
+
+}
+
+.div2 button:hover {
+    background-color: #deede5;
+    cursor: pointer;
+}
+
+.google:hover {
+    background-color: #b6f1d2;
+    cursor: pointer;
+}
