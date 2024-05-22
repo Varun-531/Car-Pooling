@@ -1,0 +1,24 @@
+# Dependency directories
+node_modules/
+
+# Production build files
+build/
+dist/
+
+# Environment variables file
+.env
+
+# Editor directories and files
+.idea/
+.vscode/
+
+# Compiled JavaScript
+*.js
+
+# Dependency lock files
+package-lock.json
+yarn.lock
+
+uploads/
+
+key.json

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/user.css">
+    <title>User Info</title>
+</head>
+
+<body>
+    <h1>User Information</h1>
+    <div id="userInfo" style="white-space: pre-line;"></div>
+    <div id="userDetails" style="white-space: pre-line;"></div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-auth.js";
+
+        const firebaseConfig = {
+  apiKey: "AIzaSyA32raez2iPiLuBaghnb4F-1EmIgUtQDXg",
+  authDomain: "wheelstogether-f778c.firebaseapp.com",
+  projectId: "wheelstogether-f778c",
+  storageBucket: "wheelstogether-f778c.appspot.com",
+  messagingSenderId: "283188033589",
+  appId: "1:283188033589:web:29b7a59b1efeb08ccc997c",
+  measurementId: "G-BHQ7LE9F3S"
+};
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        const userInfoElement = document.getElementById("userInfo");
+        const userDetailsElement = document.getElementById("userDetails");
+
+        // Trigger "Get My Info" action on page load
+        const auth = getAuth(app);
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                if (user.displayName) {
+                    userInfoElement.innerText = `Hi ${user.displayName}, you are logged in.\nEmail: ${user.email}`;
+                } else {
+                    userInfoElement.innerHTML = `Hi ${user.email}`;
+                }
+            } else {
+                userInfoElement.innerText = "No, you are not a user.";
+            }
+        });
+
+        // Trigger "Get User Details" action on page load
+        const userEmail = getCookie("userEmail");
+        if (userEmail) {
+            fetchUserDetails(userEmail);
+        }
+
+        // Function to fetch user details and update HTML
+        async function fetchUserDetails(userEmail) {
+            try {
+                const response = await fetch("/getuserdetails", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ userEmail: userEmail }),
+                });
+
+                if (response.ok) {
+                    const htmlContent = await response.text();
+                    userDetailsElement.innerHTML = htmlContent; // Update the HTML content
+                } else {
+                    userDetailsElement.innerText = "Error fetching user details.";
+                }
+            } catch (error) {
+                userDetailsElement.innerText = "An error occurred while fetching user details.";
+                console.error(error);
+            }
+        }
+
+        // Function to get a cookie by name
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+    </script>
+</body>
+
+</html>

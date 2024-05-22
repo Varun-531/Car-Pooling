@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Info</title>
+</head>
+<body>
+    <div class="bike-loader">
+        <svg class="bike" viewBox="0 0 48 30" width="48px" height="30px">
+            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+                <g transform="translate(9.5,19)">
+                    <circle class="bike__tire" r="9" stroke-dasharray="56.549 56.549" />
+                    <g class="bike__spokes-spin" stroke-dasharray="31.416 31.416" stroke-dashoffset="-23.562">
+                        <circle class="bike__spokes" r="5" />
+                        <circle class="bike__spokes" r="5" transform="rotate(180,0,0)" />
+                    </g>
+                </g>
+                <g transform="translate(24,19)">
+                    <g class="bike__pedals-spin" stroke-dasharray="25.133 25.133" stroke-dashoffset="-21.991" transform="rotate(67.5,0,0)">
+                        <circle class="bike__pedals" r="4" />
+                        <circle class="bike__pedals" r="4" transform="rotate(180,0,0)" />
+                    </g>
+                </g>
+                <g transform="translate(38.5,19)">
+                    <circle class="bike__tire" r="9" stroke-dasharray="56.549 56.549" />
+                    <g class="bike__spokes-spin" stroke-dasharray="31.416 31.416" stroke-dashoffset="-23.562">
+                        <circle class="bike__spokes" r="5" />
+                        <circle class="bike__spokes" r="5" transform="rotate(180,0,0)" />
+                    </g>
+                </g>
+                <polyline class="bike__seat" points="14 3,18 3" stroke-dasharray="5 5" />
+                <polyline class="bike__body" points="16 3,24 19,9.5 19,18 8,34 7,24 19" stroke-dasharray="79 79" />
+                <path class="bike__handlebars" d="m30,2h6s1,0,1,1-1,1-1,1" stroke-dasharray="10 10" />
+                <polyline class="bike__front" points="32.5 2,38.5 19" stroke-dasharray="19 19" />
+            </g>
+        </svg>
+    </div>
+    <h1>User Information</h1>
+    <div id="userInfo"></div>
+
+    <!-- Include Firebase scripts as modules -->
+    <script type="module">
+        // Your web app's Firebase configuration
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-auth.js";
+        import { getFirestore, query, collection, where, getDocs } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+  apiKey: "AIzaSyA32raez2iPiLuBaghnb4F-1EmIgUtQDXg",
+  authDomain: "wheelstogether-f778c.firebaseapp.com",
+  projectId: "wheelstogether-f778c",
+  storageBucket: "wheelstogether-f778c.appspot.com",
+  messagingSenderId: "283188033589",
+  appId: "1:283188033589:web:29b7a59b1efeb08ccc997c",
+  measurementId: "G-BHQ7LE9F3S"
+};
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Get the reference to the DOM element where you want to display the user info
+        const userInfoElement = document.getElementById("userInfo");
+
+        // Check if a user is logged in when the page loads
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // User is logged in
+
+                // Access Firestore database
+                const db = getFirestore(app);
+
+                // Define the query to get documents where the "userEmail" field matches the user's email
+                const q = query(collection(db, "userPosts"), where("userEmail", "==", user.email));
+
+                try {
+                    const querySnapshot = await getDocs(q);
+
+                    if (querySnapshot.size > 0) {
+                        // User has posts in the "userPosts" collection
+                        userInfoElement.innerText = "Hi " + user.displayName + ", you have posts:\n";
+                        querySnapshot.forEach((doc) => {
+                            const data = doc.data();
+                            userInfoElement.innerText += JSON.stringify(data) + "\n";
+                        });
+                    } else {
+                        // No posts found for the user
+                        userInfoElement.innerText = "Hi " + user.displayName + ", you have no posts.";
+                    }
+                } catch (error) {
+                    console.error("Error fetching user posts:", error);
+                }
+            } else {
+                // User is not logged in
+                userInfoElement.innerText = "No, you are not a user.";
+            }
+        });
+</script>
+<script>
+    window.addEventListener('load', function() {
+        // After 4 seconds (4000 milliseconds), hide the loader
+        setTimeout(function() {
+            document.querySelector('.bike-loader').style.display = 'none';
+        }, 2000);
+    });
+</script>
+</body>
+</html>
